@@ -1,0 +1,10 @@
+jumpAtc 接在跑步第一下攻擊時使用
+
+Atc 第一下 Frame 01-10
+
+    第二下 Frame 11-20
+
+    第三下集氣攻擊 Frame 21-45 (集氣時間21-30)
+
+Defend 單次格擋 Frame 01-15
+       重複格擋 Frame 05-11循環

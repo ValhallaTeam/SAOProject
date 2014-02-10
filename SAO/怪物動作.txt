@@ -1,0 +1,7 @@
+jumpAtc 接在跑步第一下攻擊時使用
+
+Atc 第一下 Frame 01-12
+
+    第二下 Frame 13-20
+
+    第三下 Frame 21-45
