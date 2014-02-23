@@ -7,26 +7,28 @@ public class PlayerMovement : MonoBehaviour
 	public float fDampTime = 0.1f;
 	private Animator kAnim;
 	private HashIDs kHash;
-	private bool bIsFire;
+	private bool bIsHurtAttack;
 	private int iAttackCount;
-	private int iComboNext;
+	private bool bIsComboNext;
+	private bool bCanComboNext;
 
 	void Awake()
 	{
 		kAnim = GetComponent<Animator>();
 		kHash = GameObject.FindGameObjectWithTag(Tags.strGameController).GetComponent<HashIDs>();
 		iAttackCount = 0;
-		iComboNext = 0;
+		bIsComboNext = false;
+		bCanComboNext = false;
 	}
 
 	void FixedUpdate()
 	{
 		float fH = Input.GetAxis("Horizontal");
 		float fV = Input.GetAxis("Vertical");
-		bool bFire = Input.GetButton("Fire1");
+		bool bIsAttack = Input.GetButtonDown("Fire1");
 
 		MovementManagement(fH, fV);
-		AttackManagement(bFire);
+		AttackManagement(bIsAttack);
 	}
 
 	void MovementManagement(float fH, float fV)
@@ -59,71 +61,65 @@ public class PlayerMovement : MonoBehaviour
 		rigidbody.MoveRotation(vNewRotation);
 	}
 
-	void AttackManagement( bool bFire )
+	void AttackManagement( bool bIsAttack )
 	{
-		if(bFire)
+		if(bIsAttack)
 		{
-			if(iComboNext == 0)
+			if(iAttackCount >= 1)
 			{
-				iComboNext = 1;
+				if( bCanComboNext )
+				{
+					bIsComboNext = true;
+					bCanComboNext = false;
+					++ iAttackCount;
+				}
+			}else
+			{	
+				++ iAttackCount;
+				kAnim.SetInteger(kHash.iPlayerAttackCount, iAttackCount);
 			}
 
-			kAnim.SetInteger(kHash.iPlayerAttackCount, iComboNext);
 		}
 	}
 
-	void Attack1( int iIsAttack)
+	void AttackStart( int iIsAttack)
 	{
-		bIsFire = System.Convert.ToBoolean(iIsAttack);
-		if(bIsFire)
-		{
-			iAttackCount = 1;
-		}else
-		{
-			iComboNext = 0;
-			kAnim.SetInteger(kHash.iPlayerAttackCount, iComboNext);
-		}
+		bIsHurtAttack = true;
 	}
 
-	void Attack2( int iIsAttack )
+	void AttackEnd( int iIsAttack )
 	{
-		bIsFire = System.Convert.ToBoolean(iIsAttack);
-		if(bIsFire)
+		bIsHurtAttack = false;
+		if (bIsComboNext)
 		{
-			iAttackCount = 2;
-		}else
+			if(iAttackCount > 2)
+			{
+				int iTest = 0;
+			}
+			kAnim.SetInteger (kHash.iPlayerAttackCount, iAttackCount);
+		} else 
 		{
-			iComboNext = 0;
-			kAnim.SetInteger(kHash.iPlayerAttackCount, iComboNext);
+			if(iAttackCount > 1)
+			{
+				int iTest = 0;
+			}
+
+			iAttackCount = 0;
+			kAnim.SetInteger (kHash.iPlayerAttackCount, iAttackCount);
 		}
+		bIsHurtAttack = false;
+		bIsComboNext = false;
+		bCanComboNext = false;
 	}
 
-	void Attack3( int iIsAttack )
+	void CanComboNext( int iCanCombo )
 	{
-		bIsFire = System.Convert.ToBoolean(iIsAttack);
-		if(bIsFire)
-		{
-			iAttackCount = 3;
-		} else
-		{
-			iComboNext = 0;
-			kAnim.SetInteger(kHash.iPlayerAttackCount, iComboNext);
-		}
-
+		bCanComboNext = true;
 	}
 
-	void CanComboNext( int iNext )
+	public bool GetIsHurtAttack()
 	{
-		iComboNext = iNext;
-		if(iComboNext == 0)
-		{
-			// I should into combo idle
-		}
-	}
-
-	public bool IsFire()
-	{
-		return bIsFire;
+		return bIsHurtAttack;
 	}
 
 	public int GetAttackCount()

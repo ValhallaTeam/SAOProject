@@ -1,8 +1,21 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerMovement.cs">
+    <Files>
+      <File FileName="Assets\Scripts\HashIDs.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerMovement.cs" Line="30" Column="31" />
+      <File FileName="Assets\Scripts\Tags.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\SAOProject\trunk\SAO\Unity Project\Assets\Scripts\Enemy.cs" line="34" />
+      <Breakpoint file="D:\SAOProject\trunk\SAO\Unity Project\Assets\Scripts\Enemy.cs" line="36" />
+      <Breakpoint file="D:\SAOProject\trunk\SAO\Unity Project\Assets\Scripts\PlayerMovement.cs" line="88" />
+      <Breakpoint file="D:\SAOProject\trunk\SAO\Unity Project\Assets\Scripts\PlayerMovement.cs" line="91" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Assets\Scripts\PlayerMovement.cs" line="64" offsetX="189" offsetY="1071" expression="bFire" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>
